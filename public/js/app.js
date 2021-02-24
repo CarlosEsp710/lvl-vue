@@ -4933,6 +4933,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -4959,9 +4961,34 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   mounted: function mounted() {
-    console.log('Component mounted.');
+    console.log("Component mounted.");
+  },
+  data: function data() {
+    return {
+      ideas: []
+    };
+  },
+  created: function created() {
+    this.getIdeas();
+  },
+  methods: {
+    getIdeas: function getIdeas() {
+      var _this = this;
+
+      var urlIdeas = "mis-ideas";
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get(urlIdeas).then(function (response) {
+        _this.ideas = response.data;
+      });
+    }
   }
 });
 
@@ -41000,56 +41027,53 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _c("h2", { staticClass: "text-center" }, [_vm._v("Catura tus Ideas")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "card card-body bg-light" }, [
+      _c("h4", { staticClass: "text-start" }, [
+        _vm._v("¿En qué estás pensando?")
+      ]),
+      _vm._v(" "),
+      _vm._m(0),
+      _vm._v(" "),
+      _c("hr"),
+      _vm._v(" "),
+      _c(
+        "ul",
+        { staticClass: "list-unstyled" },
+        _vm._l(_vm.ideas, function(idea, index) {
+          return _c("li", { key: index }, [
+            _c("p", { staticClass: "fs-6 text-start" }, [
+              _c("small", { staticClass: "text-muted" }, [
+                _c("em", [_vm._v(" " + _vm._s(idea.created_at) + " ")])
+              ]),
+              _vm._v("\n          " + _vm._s(idea.description) + "\n        ")
+            ])
+          ])
+        }),
+        0
+      )
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("h2", { staticClass: "text-center" }, [_vm._v("Catura tus Ideas")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card card-body bg-light" }, [
-        _c("h4", { staticClass: "text-start" }, [
-          _vm._v("¿En qué estás pensando?")
-        ]),
+    return _c("form", [
+      _c("div", { staticClass: "input-group sm-3" }, [
+        _c("input", { staticClass: "form-control", attrs: { type: "text" } }),
         _vm._v(" "),
-        _c("form", [
-          _c("div", { staticClass: "input-group sm-3" }, [
-            _c("input", {
-              staticClass: "form-control",
-              attrs: { type: "text" }
-            }),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-outline-secondary",
-                attrs: { type: "submit", id: "button-addon2" }
-              },
-              [
-                _vm._v(
-                  "\n                        Agregar\n                    "
-                )
-              ]
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("hr"),
-        _vm._v(" "),
-        _c("ul", { staticClass: "list-unstyled" }, [
-          _c("li", [
-            _c("p", { staticClass: "fs-6 text-start" }, [
-              _c("small", { staticClass: "text-muted" }, [
-                _vm._v("hace un minuto")
-              ]),
-              _vm._v(" "),
-              _c("em", [_vm._v("Mi nueva idea")])
-            ])
-          ])
-        ])
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-outline-secondary",
+            attrs: { type: "submit", id: "button-addon2" }
+          },
+          [_vm._v("\n          Agregar\n        ")]
+        )
       ])
     ])
   }
@@ -53203,6 +53227,18 @@ Vue.compile = compileToFunctions;
 /******/ 	// It's empty as some runtime module handles the default behavior
 /******/ 	__webpack_require__.x = x => {};
 /************************************************************************/
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports

@@ -17,10 +17,12 @@
       </form>
       <hr />
       <ul class="list-unstyled">
-        <li>
+        <li v-for="(idea, index) in ideas" :key="index">
           <p class="fs-6 text-start">
-            <small class="text-muted">hace un minuto</small>
-            <em>Mi nueva idea</em>
+            <small class="text-muted">
+              <em> {{ idea.created_at }} </em>
+            </small>
+            {{ idea.description }}
           </p>
         </li>
       </ul>
@@ -30,9 +32,28 @@
 
 <script>
 import axios from "axios";
+import toastr from "toastr";
+import moment from "moment";
+
 export default {
   mounted() {
     console.log("Component mounted.");
+  },
+  data() {
+    return {
+      ideas: [],
+    };
+  },
+  created: function () {
+    this.getIdeas();
+  },
+  methods: {
+    getIdeas: function () {
+      var urlIdeas = "mis-ideas";
+      axios.get(urlIdeas).then((response) => {
+        this.ideas = response.data;
+      });
+    },
   },
 };
 </script>

@@ -13,6 +13,6 @@ class IdeaSeeder extends Seeder
      */
     public function run()
     {
-        //
+        \App\Models\Idea::factory(10)->create();
     }
 }
